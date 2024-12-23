@@ -20,8 +20,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework",
     'habits',
     'users',
+    "django_filters",
+    "rest_framework_simplejwt",
 ]
 
 MIDDLEWARE = [
@@ -131,14 +134,14 @@ CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 
-CELERY_BEAT_SCHEDULE = {
+"""CELERY_BEAT_SCHEDULE = {
     "check_users": {
         "task": "materials.tasks.check_users",  # Путь к задаче
         "schedule": timedelta(
             seconds=10
         ),  # Расписание выполнения задачи (например, каждые 10 минут)
     },
-}
+}"""
 
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
