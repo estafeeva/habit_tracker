@@ -1,8 +1,11 @@
 from rest_framework import serializers
 
 from habits.models import Habit
-from habits.validators import validate_duration, validate_period, validate_reward_or_pleasant_habit
-from users.models import User
+from habits.validators import (
+    validate_duration,
+    validate_period,
+    validate_reward_or_pleasant_habit,
+)
 
 
 class HabitSerializer(serializers.ModelSerializer):
@@ -15,16 +18,22 @@ class HabitSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         is_pleasant_habit = self.get_actual_field_for_validation(
-            attrs,
-            "is_pleasant_habit"
+            attrs, "is_pleasant_habit"
         )
         linked_habit = self.get_actual_field_for_validation(
             attrs,
             "linked_habit"
         )
-        reward = self.get_actual_field_for_validation(attrs, "reward")
+        reward = self.get_actual_field_for_validation(
+            attrs,
+            "reward"
+        )
 
-        validate_reward_or_pleasant_habit(is_pleasant_habit, linked_habit, reward)
+        validate_reward_or_pleasant_habit(
+            is_pleasant_habit,
+            linked_habit,
+            reward
+        )
 
         return attrs
 

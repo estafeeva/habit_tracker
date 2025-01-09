@@ -1,19 +1,26 @@
-import datetime
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 class User(AbstractUser):
     """Модель пользователь:
-    все поля от обычного пользователя, но авторизация по на email;
+    все поля от обычного пользователя, но авторизация по email;
+    телеграм;
     телефон;
     город;
     аватарка.
     """
 
     username = None
-    email = models.EmailField(unique=True, verbose_name="Email")
+    email = models.EmailField(
+        unique=True,
+        verbose_name="Email"
+    )
+    tg = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+        verbose_name="Telegram_id"
+    )
     phone = models.CharField(
         max_length=35,
         verbose_name="Телефон",
@@ -37,7 +44,10 @@ class User(AbstractUser):
     )
 
     token = models.CharField(
-        max_length=100, verbose_name="Token", blank=True, null=True
+        max_length=100,
+        verbose_name="Token",
+        blank=True,
+        null=True
     )
 
     USERNAME_FIELD = "email"
@@ -49,5 +59,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
-
-

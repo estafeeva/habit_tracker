@@ -13,7 +13,7 @@ class HabitViewSet(ModelViewSet):
     serializer_class = HabitSerializer
 
     def get_queryset(self):
-        queryset = Habit.objects.filter(user=self.request.user)
+        queryset = Habit.objects.filter(user__pk=self.request.user.pk)
         return queryset
 
     def perform_create(self, serializer):
@@ -22,7 +22,7 @@ class HabitViewSet(ModelViewSet):
         habit.save()
 
     def get_permissions(self):
-        if self.action in ['update', 'partial_update', 'destroy']:
+        if self.action in ["update", "partial_update", "destroy"]:
             self.permission_classes = [IsOwner]
         return super().get_permissions()
 
@@ -38,9 +38,9 @@ class PublicViewSet(ModelViewSet):
         habit.save()
 
     def get_permissions(self):
-        if self.action in ['update', 'partial_update', 'destroy']:
+        if self.action in ["update", "partial_update", "destroy"]:
             self.permission_classes = [IsOwner]
-        elif self.action in ['create']:
+        elif self.action in ["create"]:
             self.permission_classes = [~AllowAny]
 
         return super().get_permissions()
