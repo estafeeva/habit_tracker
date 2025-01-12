@@ -5,6 +5,13 @@ from users.tasks import send_message_to_Telegram
 
 
 class Command(BaseCommand):
+
     def handle(self, *args, **kwargs):
-        habits = [item for item in Habit.objects.all()]
-        send_message_to_Telegram(habits)
+        i = 0
+        if i == 0:
+            habits = [item for item in Habit.objects.all()]
+            send_message_to_Telegram(habits)
+            i +=1
+            print(i)
+        else:
+            pass

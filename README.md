@@ -104,3 +104,33 @@ python -Xutf8 manage.py dumpdata auth > fixtures/auth_data.json --indent=4
 
 ## Тесты
 Покрытие тестами - 82%
+
+## Docker
+
+### Для настроки
+
+Скачать  Docker с сайта https://docs.docker.com/
+
+Необходимо выйти из аккаунта для корректной работы (Для выхода выполните команду docker logout в терминале или нажмите на кнопку Sign out в Docker Desktop).
+
+На Windows:
+- В Docker Desktop перейдите в настройки
+- выберите раздел Docker Engine
+- Добавьте в поле настроек JSON с такими данными:
+```
+"registry-mirrors": [
+  "https://mirror.gcr.io", 
+  "https://daocloud.io", 
+  "https://c.163.com/", 
+  "https://registry.docker-cn.com"
+]
+```
+- Нажмите на кнопку Apply & restart и дождитесь, когда Docker перезагрузится.
+
+### Для запуска
+- Созданы файлы docker-compose.yml и Dockerfile
+- Соберите образ с помощью команды: `docker-compose build`
+- Запустите контейнеры с помощью команды: `docker-compose up`
+- Для остановки и удаления контейнеров используйте Ctrl + C в терминале, где запущен 
+docker-compose up
+- Для остановки контейнеров и удаления созданных ресурсов выполните команду: `docker-compose down`
